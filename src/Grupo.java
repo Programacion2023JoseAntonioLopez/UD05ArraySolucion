@@ -13,19 +13,19 @@ public class Grupo {
     private String nombreGrupo;       // Nombre del grupo
     private String[] alumnos;         // Array de nombres de los alumnos
     private Asignatura[] asignaturas; // Array de asignaturas del grupo
-    int totalAlumnos;                 // Total de alumnos en el grupo
-    int totalAsignaturas;             // Total de asignaturas en el grupo
+    private int totalAlumnos;                 // Total de alumnos en el grupo
+    private int totalAsignaturas;             // Total de asignaturas en el grupo
 
     /**
      * Constructor por defecto.
      * Inicializa el grupo con valores predefinidos.
      */
     public Grupo() {
-        this.nombreGrupo = "Prueba";
-        this.totalAlumnos = 10;
-        alumnos = new String[10];
-        this.totalAsignaturas = 5;
-        asignaturas = new Asignatura[5];
+        this.nombreGrupo = "Prueba grupo";
+        this.totalAlumnos = 5;
+        alumnos = new String[5];
+        this.totalAsignaturas = 3;
+        asignaturas = new Asignatura[3];
         inicializarArrays(); // Inicializa los arrays con valores de ejemplo.
     }
 
@@ -56,27 +56,20 @@ public class Grupo {
         this.alumnos[2] = "Luis";
         this.alumnos[3] = "María";
         this.alumnos[4] = "Carlos";
-        this.alumnos[5] = "Laura";
-        this.alumnos[6] = "Pedro";
-        this.alumnos[7] = "Sofía";
-        this.alumnos[8] = "Javier";
-        this.alumnos[9] = "Isabel";
+
+
 
         // Inicializa las asignaturas con nombres y arrays de notas
-        double[] notasMates = {7, 5, 4, 6, 9, 10, 3, 8, 8, 9};
-        this.asignaturas[0] = new Asignatura("Mates", notasMates);
+        double[] notasMates = {7, 5, 4, 6, 2};
+        this.asignaturas[0] = new Asignatura("Matemáticas", notasMates);
 
-        double[] notasFisica = {10, 9, 10, 10, 8, 10, 9, 10, 10, 10};
-        this.asignaturas[1] = new Asignatura("Fisica", notasFisica);
+        double[] notasFisica = {10, 9, 10, 10, 1};
+        this.asignaturas[1] = new Asignatura("Física", notasFisica);
 
-        double[] notasCocina = {10, 9, 8, 5, 7, 6, 4, 3, 5, 2};
-        this.asignaturas[2] = new Asignatura("Cocina", notasCocina);
+        double[] notasCocina = {10, 9, 8, 5, 4};
+        this.asignaturas[2] = new Asignatura("Programación en Java", notasCocina);
 
-        double[] notasDiseno = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        this.asignaturas[3] = new Asignatura("Diseño", notasDiseno);
 
-        double[] notasTenis = {6, 7, 8, 9, 10, 5, 4, 3, 2, 1};
-        this.asignaturas[4] = new Asignatura("Tenis", notasTenis);
     }
 
     /**
@@ -284,7 +277,7 @@ public class Grupo {
      */
     public void muestraMediaAlumnos() {
         StringBuilder sb = new StringBuilder();
-
+        sb.append("----------Media de los alumnos------------\n");
         // Encabezado con nombres de los alumnos
         for (int i = 0; i < totalAlumnos; i++) {
             sb.append(String.format("%-15s", alumnos[i]));
@@ -293,7 +286,7 @@ public class Grupo {
 
         // Muestra las medias calculadas para cada alumno
         for (int i = 0; i < totalAlumnos; i++) {
-            sb.append(String.format("%-15s", dameAlumnoMedia(i)));
+            sb.append(String.format("%-15.2f", dameAlumnoMedia(i)));
         }
         System.out.println(sb);
     }
@@ -302,6 +295,7 @@ public class Grupo {
      * Identifica y muestra los alumnos repetidores (más de 2 suspensos).
      */
     public void muestraRepetidores() {
+        System.out.println("--------Repetidores--------");
         for (int i = 0; i < totalAlumnos; i++) {
             if (dameAlumnoSuspensos(i) > 2) {
                 System.out.println("Repetidor: " + alumnos[i]);
@@ -313,6 +307,7 @@ public class Grupo {
      * Analiza las notas de cada asignatura y muestra estadísticas.
      */
     public void analizaAsignaturas() {
+        System.out.println("--------Analisis por asignaturas-------");
         for (int i = 0; i < totalAsignaturas; i++) {
             System.out.println(" ----- " + asignaturas[i].getNombreAsignatura() + " ----- ");
             asignaturas[i].analizaGrupo();
@@ -325,7 +320,7 @@ public class Grupo {
      */
     public void analizaCurso() {
         double[] medias = new double[totalAlumnos];
-
+        System.out.println("--------Analisis Grupo "+nombreGrupo+"-------");
         // Calcula las medias de todos los alumnos
         for (int i = 0; i < totalAlumnos; i++) {
             medias[i] = dameAlumnoMedia(i);
